@@ -1,0 +1,53 @@
+---
+title: "Next.js로 문서 사이트 만들기"
+description: "처음부터 문서 사이트를 스캐폴딩하고, 스타일링하고, 배포하는 단계별 가이드."
+date: "2026-03-08"
+tag: "Beginner"
+---
+
+## Overview
+
+In this tutorial you will build a personal documentation site using Next.js (App Router),
+TypeScript, and Tailwind CSS — exactly like this site.
+
+## Step 1: Create the Project
+
+```bash
+npx create-next-app@latest my-docs --typescript --tailwind --app
+cd my-docs
+```
+
+## Step 2: Plan the Structure
+
+Before writing code, define your pages:
+
+- `/` — Home / landing
+- `/guides` — List of guides
+- `/guides/[slug]` — Individual guide
+
+## Step 3: Create the Pages
+
+Add `app/guides/page.tsx` for the guides index, and `app/guides/[slug]/page.tsx` for
+individual articles.
+
+## Step 4: Add Components
+
+Create a `components/` folder with:
+
+- `Header.tsx` — navigation
+- `Footer.tsx` — footer links
+- `ArticleCard.tsx` — reusable card for listing content
+
+## Step 5: Add Content
+
+Create a `content/guides/` directory and write your first `.mdx` file.
+
+## Step 6: Deploy
+
+Push to GitHub and deploy on Vercel:
+
+```bash
+vercel --prod
+```
+
+Done. Your docs site is live.

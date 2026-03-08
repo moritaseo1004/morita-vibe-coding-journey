@@ -1,0 +1,47 @@
+---
+title: "Claude Code 시작하기"
+description: "Claude Code를 AI 코딩 어시스턴트로 설정하고 사용하는 방법."
+date: "2026-03-08"
+tag: "Tools"
+---
+
+## What is Claude Code?
+
+Claude Code is Anthropic's official CLI for Claude. It runs in your terminal and acts as an
+AI pair programmer — reading your codebase, editing files, running commands, and helping
+you ship faster.
+
+## Installation
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+Then authenticate:
+
+```bash
+claude
+```
+
+Follow the prompts to log in with your Anthropic account.
+
+## Basic Usage
+
+Once inside a project directory, just run:
+
+```bash
+claude
+```
+
+You can then describe what you want in plain English. For example:
+
+> "Add a dark mode toggle to the header component."
+
+Claude will read your files, plan the changes, and ask for permission before editing anything.
+
+## Tips for Vibe Coding with Claude
+
+- Be specific about what you want, but not prescriptive about *how*
+- Use `/clear` to reset context between unrelated tasks
+- Let Claude read the whole file before asking it to edit
+- Review diffs carefully — Claude is fast but not infallible

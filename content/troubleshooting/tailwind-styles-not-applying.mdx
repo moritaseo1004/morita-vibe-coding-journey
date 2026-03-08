@@ -1,0 +1,65 @@
+---
+title: "Tailwind 스타일이 적용되지 않을 때"
+description: "Tailwind CSS 클래스가 앱에서 렌더링되지 않는 원인을 디버그하는 방법."
+date: "2026-03-08"
+tag: "Tailwind CSS"
+---
+
+## Problem
+
+You add Tailwind classes to your components but nothing changes in the browser.
+
+## Common Causes
+
+### 1. Wrong CSS import (Tailwind v4)
+
+Tailwind v4 uses a new import syntax. Make sure your `globals.css` has:
+
+```css
+@import "tailwindcss";
+```
+
+Not the old v3 directives:
+
+```css
+/* Do NOT use these in v4 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### 2. PostCSS plugin not configured
+
+Your `postcss.config.mjs` should use `@tailwindcss/postcss`:
+
+```js
+const config = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+export default config;
+```
+
+### 3. globals.css not imported in layout
+
+Make sure `app/layout.tsx` imports the CSS file:
+
+```tsx
+import "./globals.css";
+```
+
+### 4. Dev server cache stale
+
+Stop the dev server, clear `.next/`, and restart:
+
+```bash
+rm -rf .next && npm run dev
+```
+
+## Solution Checklist
+
+- [ ] `@import "tailwindcss"` in globals.css
+- [ ] `@tailwindcss/postcss` in postcss.config.mjs
+- [ ] globals.css imported in layout.tsx
+- [ ] Dev server restarted after config changes

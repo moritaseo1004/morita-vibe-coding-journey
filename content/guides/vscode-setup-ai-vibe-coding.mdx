@@ -1,0 +1,201 @@
+---
+title: "AI 바이브 코딩을 위한 VS Code 설정"
+description: "올바른 확장, 설정, 단축키로 VS Code를 구성해 AI 보조 코딩의 플로우 상태에 들어가는 방법."
+date: "2026-03-08"
+tag: "Tools"
+---
+
+## Why Your Editor Setup Matters
+
+Vibe coding is about staying in flow. Every time you reach for the mouse, hunt for a command, or wait for a slow tool to respond, you break that flow. A well-configured VS Code setup removes that friction — your editor disappears and you just think and build.
+
+This guide covers the exact setup I use: extensions, settings, and keybindings optimized for AI-assisted development.
+
+---
+
+## Extensions
+
+Install these from the VS Code Marketplace or via the terminal.
+
+### Core AI Extensions
+
+```bash
+# Claude Code (official CLI — run outside VS Code)
+npm install -g @anthropic-ai/claude-code
+
+# GitHub Copilot (optional — works alongside Claude)
+code --install-extension GitHub.copilot
+code --install-extension GitHub.copilot-chat
+```
+
+### Developer Experience
+
+```bash
+# Better syntax highlighting and bracket matching
+code --install-extension usernamehw.errorlens
+code --install-extension streetsidesoftware.code-spell-checker
+
+# File navigation
+code --install-extension alefragnani.project-manager
+code --install-extension christian-kohler.path-intellisense
+
+# Git
+code --install-extension eamodio.gitlens
+
+# Formatting
+code --install-extension esbenp.prettier-vscode
+code --install-extension dbaeumer.vscode-eslint
+
+# Tailwind CSS
+code --install-extension bradlc.vscode-tailwindcss
+```
+
+---
+
+## Settings
+
+Open your `settings.json` with `Cmd/Ctrl + Shift + P` → **Open User Settings (JSON)** and add:
+
+```json
+{
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.7,
+  "editor.fontFamily": "'Geist Mono', 'JetBrains Mono', monospace",
+  "editor.fontLigatures": true,
+
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "editor.minimap.enabled": false,
+  "editor.scrollBeyondLastLine": false,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.smoothScrolling": true,
+
+  "editor.suggest.preview": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.acceptSuggestionOnEnter": "smart",
+
+  "workbench.activityBar.location": "hidden",
+  "workbench.statusBar.visible": true,
+  "workbench.editor.showTabs": "multiple",
+  "workbench.colorTheme": "Default Dark Modern",
+
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.lineHeight": 1.4,
+
+  "files.autoSave": "onFocusChange",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true
+}
+```
+
+### What each section does
+
+| Setting | Why |
+|---|---|
+| `fontLigatures` | Renders `=>`, `!==`, `<=` as clean glyphs — easier to scan |
+| `formatOnSave` | Keeps code clean without thinking about it |
+| `minimap.enabled: false` | Removes visual noise — you have fuzzy search, you don't need it |
+| `suggest.preview` | Shows AI/autocomplete suggestions inline before you accept |
+| `activityBar.location: hidden` | Maximises editor space — use `Cmd+Shift+E/X/G` instead |
+| `autoSave: onFocusChange` | Never lose work when switching to the terminal |
+
+---
+
+## Keybindings
+
+Open `keybindings.json` with `Cmd/Ctrl + Shift + P` → **Open Keyboard Shortcuts (JSON)**:
+
+```json
+[
+  {
+    "key": "cmd+shift+t",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "cmd+shift+f",
+    "command": "workbench.action.findInFiles"
+  },
+  {
+    "key": "cmd+k cmd+o",
+    "command": "workbench.action.files.openFolder"
+  },
+  {
+    "key": "ctrl+`",
+    "command": "workbench.action.terminal.new"
+  }
+]
+```
+
+> On Windows/Linux, replace `cmd` with `ctrl`.
+
+---
+
+## Workspace Settings for Next.js Projects
+
+Add a `.vscode/settings.json` at the project root to override settings per project:
+
+```json
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
+}
+```
+
+The `tailwindCSS.experimental.classRegex` line enables Tailwind IntelliSense inside `clsx()` calls — essential for conditional class names.
+
+---
+
+## The Terminal Workflow
+
+Run Claude Code in the integrated terminal alongside your editor:
+
+```bash
+# Open the project
+cd my-project
+
+# Start the dev server in one terminal tab
+npm run dev
+
+# Start Claude Code in a second terminal tab
+claude
+```
+
+Split the terminal (`Cmd+Shift+5`) so you can see both at once. You edit in the editor, Claude runs in the terminal, the dev server hot-reloads in the browser — all three visible without switching windows.
+
+---
+
+## Recommended Theme and Font
+
+- **Theme:** Default Dark Modern (built-in) or [Catppuccin Mocha](https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc)
+- **Font:** [Geist Mono](https://vercel.com/font) — pairs naturally with Next.js projects since it's the default Geist font
+
+Install Geist Mono on your system, then set it in `settings.json`:
+
+```json
+{
+  "editor.fontFamily": "'Geist Mono', monospace"
+}
+```
+
+---
+
+## Quick Checklist
+
+Before starting a vibe coding session, confirm:
+
+- [ ] Dev server is running (`npm run dev`)
+- [ ] Claude Code is open in a split terminal
+- [ ] Format on save is enabled
+- [ ] No distracting notifications (enable **Do Not Disturb** mode)
+- [ ] Browser DevTools is docked to the side, not the bottom

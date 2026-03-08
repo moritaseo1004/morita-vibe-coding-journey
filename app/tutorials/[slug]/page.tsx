@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Breadcrumb from "@/components/Breadcrumb";
 import PrevNextNav from "@/components/PrevNextNav";
+import DiscussionSection from "@/components/discussion/DiscussionSection";
 import { getArticle, getAllSlugs } from "@/lib/docs";
 
 type Props = {
@@ -56,6 +57,8 @@ export default async function TutorialDetailPage({ params }: Props) {
         prev={{ label: "Back to Tutorials", href: "/tutorials" }}
         next={null}
       />
+
+      <DiscussionSection slug={slug} docType="tutorials" />
     </main>
   );
 }

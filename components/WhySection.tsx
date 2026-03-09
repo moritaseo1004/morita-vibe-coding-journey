@@ -67,7 +67,7 @@ export default function WhySection() {
           <p className="mb-3 text-sm font-medium uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
             Why this exists
           </p>
-          <h2 className="mb-5 text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="mb-5 text-3xl font-bold leading-[1.6] tracking-tight sm:text-4xl sm:leading-[1.6]">
             개발은 원래 막히는 것입니다.
             <br />
             <span className="text-zinc-400 dark:text-zinc-500">그래서 기록이 필요합니다.</span>

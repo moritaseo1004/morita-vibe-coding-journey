@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CommandPalette from "@/components/CommandPalette";
 import { getSearchIndex } from "@/lib/search-index";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,14 +33,24 @@ export default function RootLayout({
   const searchItems = getSearchIndex();
 
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
+      <head>
+        {/* Blocking script: apply theme before first paint to prevent flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var s=localStorage.getItem('theme');var d=document.documentElement;if(s==='dark'||(s!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches)){d.classList.add('dark');}})();`,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
       >
-        <Header />
-        <CommandPalette searchItems={searchItems} />
-        {children}
-        <Footer />
+        <ThemeProvider>
+          <Header />
+          <CommandPalette searchItems={searchItems} />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

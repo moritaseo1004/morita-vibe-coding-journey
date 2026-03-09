@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { label: "Start Journey",   href: "/start" },
@@ -63,6 +64,8 @@ export default function Header() {
             ⌘K
           </kbd>
         </button>
+
+        <ThemeToggle />
 
         {/* Hamburger button — mobile only */}
         <button

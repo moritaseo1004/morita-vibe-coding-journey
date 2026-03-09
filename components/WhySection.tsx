@@ -68,9 +68,7 @@ export default function WhySection() {
             Why this exists
           </p>
           <h2 className="mb-5 text-3xl font-bold leading-[1.6] tracking-tight sm:text-4xl sm:leading-[1.6]">
-            개발은 원래 막히는 것입니다.
-            <br />
-            <span className="text-zinc-400 dark:text-zinc-500">그래서 기록이 필요합니다.</span>
+            개발은 김문규
           </h2>
           <p className="mx-auto max-w-xl text-base leading-relaxed text-zinc-500 dark:text-zinc-400">
             AI 도구가 넘쳐나는 시대에도, 처음 마주치는 에러 앞에서는 누구나 막막합니다.
